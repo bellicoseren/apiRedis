@@ -93,4 +93,11 @@ public class RedisOperations
             }
         }
     }
+    
+    public long expireList(String key,int segundos )
+    {
+        try (Jedis jedisConnection = redisConfiguration.getJedisPool().getResource()) {
+            return jedisConnection.expire(key, segundos);
+        }
+    }
 }
