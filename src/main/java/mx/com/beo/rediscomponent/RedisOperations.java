@@ -93,4 +93,20 @@ public class RedisOperations
             }
         }
     }
+     
+    public void insertElementInList(String listName, String element,int segundos)
+    {
+
+        try (Jedis jedisConnection = redisConfiguration.getJedisPool().getResource()) {
+            jedisConnection.lpush(listName, element);
+        }
+        try (Jedis jedisConnection = redisConfiguration.getJedisPool().getResource()) {
+             jedisConnection.expire(listName, segundos);
+        }
+
+    }
+    
+    
+    
+    
 }
