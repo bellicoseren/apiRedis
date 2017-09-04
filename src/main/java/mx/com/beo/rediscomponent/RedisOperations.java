@@ -93,11 +93,20 @@ public class RedisOperations
             }
         }
     }
-    
-    public long expireList(String key,int segundos )
+     
+    public void insertElementInList(String listName, String element,int segundos)
     {
+
         try (Jedis jedisConnection = redisConfiguration.getJedisPool().getResource()) {
-            return jedisConnection.expire(key, segundos);
+            jedisConnection.lpush(listName, element);
         }
+        try (Jedis jedisConnection = redisConfiguration.getJedisPool().getResource()) {
+             jedisConnection.expire(listName, segundos);
+        }
+
     }
+    
+    
+    
+    
 }
