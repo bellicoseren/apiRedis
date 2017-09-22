@@ -23,13 +23,32 @@ Para que pueda ser utilizado como una dependencia, es necesario instalar el proy
       <password>m1dll3w4r3</password>
     </server>
 ```
-2.- Empaquetar el proyecto
+2.- Agregar el siguiente plugin al **pom.xml**
+
+```xml
+    <plugin>
+      <artifactId>maven-assembly-plugin</artifactId>
+      <configuration>
+        <archive>
+          <manifest>
+            <mainClass>fully.qualified.MainClass</mainClass>
+          </manifest>
+        </archive>
+        <descriptorRefs>
+          <descriptorRef>jar-with-dependencies</descriptorRef>
+        </descriptorRefs>
+        <appendAssemblyId>false</appendAssemblyId>
+      </configuration>
+    </plugin>
+```
+
+3.- Empaquetar el proyecto
 
 ```
-mvn clean package
+mvn clean compile assembly:single
 ```
 
-3.- Subir el artefacto al repositorio remoto
+4.- Subir el artefacto al repositorio remoto
 
 ```sh
 mvn deploy:deploy-file -DgroupId=mx.com.beo \
