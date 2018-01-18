@@ -26,38 +26,18 @@ Para que pueda ser utilizado como una dependencia, es necesario instalar el proy
 2.- Agregar el siguiente plugin al **pom.xml**
 
 ```xml
-    <plugin>
-      <artifactId>maven-assembly-plugin</artifactId>
-      <configuration>
-        <archive>
-          <manifest>
-            <mainClass>fully.qualified.MainClass</mainClass>
-          </manifest>
-        </archive>
-        <descriptorRefs>
-          <descriptorRef>jar-with-dependencies</descriptorRef>
-        </descriptorRefs>
-        <appendAssemblyId>false</appendAssemblyId>
-      </configuration>
-    </plugin>
+    <distributionManagement>
+    <repository>
+      <id>nexus-repository</id>
+      <url>http://200.39.24.141:8081/repository/ADMiddleware/</url>
+    </repository>
+  </distributionManagement>
 ```
 
 3.- Empaquetar el proyecto
 
 ```
-mvn clean compile assembly:single
-```
-
-4.- Subir el artefacto al repositorio remoto
-
-```sh
-mvn deploy:deploy-file -DgroupId=mx.com.beo \
-  -DartifactId=redis-component \
-  -Dversion=1.0 \
-  -Dpackaging=jar \
-  -Dfile=<ruta-jar> \
-  -DrepositoryId=nexus-repository \
-  -Durl=http://200.39.24.141:8081/repository/ADMiddleware/
+mvn clean deploy
 ```
 
 ## Uso como dependecia 
@@ -79,4 +59,14 @@ Para utilizar la libreria como dependencia es necesario agregar al **pom.xml** d
         <url>http://200.39.24.141:8081/repository/GrupoMiddleware</url>
       </repository>
    </repositories>  
+```
+
+## Variables de ambiente
+
+Previo a la ejecucion del programa es necesario configurar las siguientes variables de ambiente:
+
+```
+ HOST_REDIS=127.0.0.1
+ PUERTO_REDIS=6379
+ PASSWORD_REDIS=kods12d48f1
 ```
