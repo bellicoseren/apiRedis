@@ -24,7 +24,7 @@ public class RedisConfiguration {
         {
             host="localhost";
             port= 6379;
-            password="";
+            password=null;
         }
         jedisPool= new JedisPool(jedisPoolConfig,host,port,Protocol.DEFAULT_TIMEOUT,password);
     }
