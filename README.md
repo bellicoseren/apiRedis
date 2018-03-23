@@ -6,43 +6,33 @@ Funciones comunes para el uso de redis
 ## Uso local
 
 Compilar el proyecto 
-```
-mvn clean install
-```
 
+##### Ambiente local
+```
+mvn --settings settings_local.xml clean install
+```
+##### Ambiente de desarrollo (Red privada)
+
+```
+mvn --settings settings_dev.xml clean install
+```
 ## Subir artefacto al repositorio remoto
 
-Para que pueda ser utilizado como una dependencia, es necesario instalar el proyecto en el repositorio remoto realizando las siguientes acciones:
+Para que pueda ser utilizado como una dependencia, es necesario instalar el proyecto en el repositorio remoto ejecutando la siguiente instrucción, dependiendo el ambiente en que se encuentre:
 
-1.- Configurar el settings.xml de maven
-
-```xml
-    <server>
-      <id>nexus-repository</id>
-      <username>middleware</username>
-      <password>m1ddl3w4r3</password>
-    </server>
+##### Ambiente local
 ```
-2.- Agregar el siguiente plugin al **pom.xml**
-
-```xml
-    <distributionManagement>
-    <repository>
-      <id>nexus-repository</id>
-      <url>http://200.39.24.141:8081/repository/ADMiddleware/</url>
-    </repository>
-  </distributionManagement>
+mvn --settings settings_local.xml clean deploy
 ```
-
-3.- Empaquetar el proyecto
+##### Ambiente de desarrollo (Red privada)
 
 ```
-mvn clean deploy
+mvn --settings settings_dev.xml clean deploy
 ```
 
 ## Uso como dependecia 
 
-Para utilizar la libreria como dependencia es necesario agregar al **pom.xml** del proyecto las siguientes etiquetas:
+Para utilizar la libreria como dependencia es necesario agregar al **pom.xml** del proyecto :
 
 ```xml
       <dependency>
@@ -50,15 +40,6 @@ Para utilizar la libreria como dependencia es necesario agregar al **pom.xml** d
          <artifactId>redis-component</artifactId>
          <version>${redis-component.version}</version>
       </dependency>
-```
-
-```xml
-   <repositories>
-      <repository>
-        <id>nexus-repository</id>
-        <url>http://200.39.24.141:8081/repository/GrupoMiddleware</url>
-      </repository>
-   </repositories>  
 ```
 
 ## Variables de ambiente
