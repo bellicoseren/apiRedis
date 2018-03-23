@@ -1,4 +1,4 @@
-# redis-component
+# Api Redis
 [![N|Solid](https://redis.io/images/redis-white.png)](https://redis.io)
 
 Funciones comunes para el uso de redis
